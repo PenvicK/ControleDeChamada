@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Exclusão</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Desaja deletar o aluno: {{ object.nome }}</h3>
+        <input type="submit" value="Deletar"/>
+    </form>
+    <a href="/aluno/lista/"><button>Cancelar</button></a>
+</body>
+</html>

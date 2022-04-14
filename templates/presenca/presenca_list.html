@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disciplinas</title>
+</head>
+<body>
+    <a href="/presenca/nova/">
+        <button>Nova Chamada</button>
+    </a>
+    <ul>
+    {% for chamada in object_list %}
+        <li>
+            {{ chamada }}
+            <a href="/presenca/{{ chamada.id }}">
+                <button>Detalhes</button>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

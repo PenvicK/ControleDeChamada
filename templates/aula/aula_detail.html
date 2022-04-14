@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.disciplina.projeto }}</title>
+</head>
+<body>
+    <div>
+        <h2>{{ object.disciplina.projeto }}</h2>
+        <p>
+            <strong>ID: </strong>
+            <span>{{ object.id }} | </span>
+            <strong>Data/hora: </strong>
+            <span>{{ object.dataHora }}</span>
+        </p>
+    </div>
+    <div>
+        <a href="/aula/{{ object.id }}/update/">
+            <button>Editar</button>
+        </a>
+        <a href="/aula/{{ object.id }}/delete/">
+            <button>Deletar</button>
+        </a>
+        <a href="/aula/lista">
+            <button>Voltar</button>
+        </a>
+    </div>
+</body>
+</html>

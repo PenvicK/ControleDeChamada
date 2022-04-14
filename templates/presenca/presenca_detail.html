@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.aluno.nome}}</title>
+</head>
+<body>
+    <div>
+        <h2>{{ object.aluno.nome }}</h2>
+        <p>
+            <strong>ID: </strong>
+            <span>{{ object.id }}</span>
+        </p>
+        <p>
+            <strong>Projeto: </strong>
+            <span>{{ object.aula.disciplina.projeto }} | </span>
+            <strong>Data/Hora: </strong>
+            <span>{{ object.aula.dataHora.date }} | {{ object.aula.dataHora.timetz }}</span>
+        </p>
+    </div>
+    <div>
+        <a href="/presenca/{{ object.id }}/update/">
+            <button>Editar</button>
+        </a>
+        <a href="/presenca/{{ object.id }}/delete/">
+            <button>Deletar</button>
+        </a>
+        <a href="/presenca/lista">
+            <button>Voltar</button>
+        </a>
+    </div>
+</body>
+</html>

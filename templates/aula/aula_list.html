@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aulas</title>
+</head>
+<body>
+    <a href="/aula/nova/">
+        <button>Nova Aula</button>
+    </a>
+    <ul>
+    {% for aula in object_list %}
+        <li>
+            {{ aula }}
+            <a href="/aula/{{ aula.id }}">
+                <button>Detalhes</button>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

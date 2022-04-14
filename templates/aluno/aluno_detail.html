@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.nome }}</title>
+</head>
+<body>
+    <div>
+        <h2>{{ object.nome }}</h2>
+        <p>
+            <strong>ID: </strong>
+            <span>{{ object.id }} | </span>
+            <strong>RA: </strong>
+            <span>{{ object.ra }}</span>
+        </p>
+        <p>
+            <strong>Usuário Discord: </strong>
+            <span>{{ object.usuarioDiscord }}</span>
+        </p>
+    </div>
+    <div>
+        <a href="/aluno/{{ aluno.id }}/update/">
+            <button>Editar</button>
+        </a>
+        <a href="/aluno/{{ aluno.id }}/delete/">
+            <button>Deletar</button>
+        </a>
+        <a href="/aluno/lista">
+                <button>Voltar</button>
+        </a>
+    </div>
+</body>
+</html>
