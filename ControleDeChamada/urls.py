@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path
 
 from aluno.views import AlunoNovo, AlunoLista, AlunoUpdate, AlunoDelete, AlunoDetail
-from aula.views import AulaNova, AulaDetail, AulaLista, AulaUpdate, AulaDelete
+# from aula.views import AulaNova, AulaDetail, AulaLista, AulaUpdate, AulaDelete
+from aula import views
+from aula.views import AulaDetail, AulaDelete
 from disciplina.views import DisciplinaNova, DisciplinaDetail, DisciplinaLista, DisciplinaUpdate, DisciplinaDelete
 from presenca.views import PresencaNova, PresencaDetail, PresencaLista, PresencaDelete
 
@@ -29,10 +31,10 @@ urlpatterns = [
     path('aluno/<int:pk>/update/', AlunoUpdate.as_view(), name='aluno-update'),
     path('aluno/<int:pk>/delete/', AlunoDelete.as_view(), name='aluno-delete'),
 
-    path('aula/nova/', AulaNova.as_view(), name='aula-nova'),
+    path('aula/nova/', views.aula_form, name='aula_nova'),
     path('aula/<int:pk>/', AulaDetail.as_view(), name='aula-detail'),
-    path('aula/lista/', AulaLista.as_view(), name='aula-lista'),
-    path('aula/<int:pk>/update/', AulaUpdate.as_view(), name='aula-update'),
+    path('aula/lista/', views.aula_list, name='aula-lista'),
+    # path('aula/<int:pk>/update/', AulaUpdate.as_view(), name='aula-update'),
     path('aula/<int:pk>/delete/', AulaDelete.as_view(), name='aula-delete'),
 
     path('disciplina/nova/', DisciplinaNova.as_view(), name='disciplina-nova'),

@@ -8,15 +8,31 @@
     <a href="/aula/nova/">
         <button>Nova Aula</button>
     </a>
-    <ul>
-    {% for aula in object_list %}
-        <li>
-            {{ aula }}
-            <a href="/aula/{{ aula.id }}">
+    <table>
+        <tr>
+            <th>Aula</th>
+            <th>Data/Hora</th>
+            <th>Ações</th>
+        </tr>
+        {% for aula in aulas %}
+        <tr>
+           {% load tz %}
+            <td>
+                {{ aula.disciplina }}&nbsp
+            </td>
+            <td>
+                {% timezone "America/Sao_Paulo" %}
+                    {{ aula.dataHora.astimezone }}&nbsp
+                {% endtimezone %}
+            </td>
+            <td>
+                <a href="/aula/{{ aula.id }}">
                 <button>Detalhes</button>
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
