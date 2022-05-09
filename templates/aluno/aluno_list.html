@@ -9,7 +9,7 @@
         <button>Novo Aluno</button>
     </a>
     <ul>
-    {% for aluno in object_list %}
+    {% for aluno in alunos %}
         <li>
             {{ aluno }}
             <a href="/aluno/{{ aluno.id }}">

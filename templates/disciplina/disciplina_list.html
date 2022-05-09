@@ -9,7 +9,7 @@
         <button>Nova Disciplina</button>
     </a>
     <ul>
-    {% for disciplina in object_list %}
+    {% for disciplina in disciplinas %}
         <li>
             {{ disciplina }}
             <a href="/disciplina/{{ disciplina.id }}">
