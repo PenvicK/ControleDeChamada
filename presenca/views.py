@@ -7,16 +7,18 @@ from django.views import generic
 from presenca.models import Presenca
 
 
+
+
 class PresencaDetail(generic.DetailView):
     model = Presenca
 
-class PresencaNova(generic.CreateView):
-    model = Presenca
-    fields = '__all__'
+# class PresencaNova(generic.CreateView):
+#     model = Presenca
+#     fields = '__all__'
 
-class PresencaLista(generic.ListView):
-    model = Presenca
-    queryset = Presenca.objects.all()
+# class PresencaLista(generic.ListView):
+#     model = Presenca
+#     queryset = Presenca.objects.all()
 
 class PresencaDelete(generic.DeleteView):
     model = Presenca

@@ -10,12 +10,10 @@ from aula.models import Aula
 class Presenca (models.Model):
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    presenca = models.BooleanField()
 
     def __str__(self):
-        if self.aluno is not None:
-            return str(self.aluno.nome) + str(' | ') + str('Presente')
-        else:
-            return str(self.aluno.nome) + str(' | ') + str('Ausente')
+        return str(self.aluno.nome)
 
     def et_absolute_url(self):
         return reverse('presenca-nova')
