@@ -16,16 +16,12 @@ Including another URLconf
 from django.urls import path, include
 
 from index import views
-from presenca.views import PresencaNova, PresencaDetail, PresencaLista, PresencaDelete
+
 
 urlpatterns = [
     path('aula/', include('aula.urls')),
     path('aluno/', include('aluno.urls')),
     path('disciplina/', include('disciplina.urls')),
+    path('presenca/', include('presenca.urls')),
     path('index/', views.index,name='index'),
-
-    path('presenca/nova/', PresencaNova.as_view(), name='presenca-nova'),
-    path('presenca/<int:pk>/', PresencaDetail.as_view(), name='presenca-detail'),
-    path('presenca/lista/', PresencaLista.as_view(), name='presenca-lista'),
-    path('presenca/<int:pk>/delete/', PresencaDelete.as_view(), name='presenca-delete'),
 ]
