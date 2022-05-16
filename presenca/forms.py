@@ -16,21 +16,25 @@ PRESENCA_CHOICES = (
 
 class FormPresenca(forms.Form):
     rfId = forms.CharField(max_length=30)
+    nmAula = forms.ModelChoiceField(queryset=Aula.objects.all())
 
     def clean(self):
         super(FormPresenca, self).clean()
 
-        if 'rfId' in self.cleaned_data:
+        if 'rfId' in self.cleaned_data and 'nmAula' in self.cleaned_data:
             rfId = self.cleaned_data['rfId']
+            aulas = self.cleaned_data['nmAula']
+            nmAula = aulas.nmAula
             if Aluno.objects.filter(rfID=rfId).exists():
                 aluno = Aluno.objects.filter(rfID=rfId)
                 date = datetime.today().date()
                 time = datetime.today().time()
 
+                prazo_inicio_aula = datetime(date.year, date.month, date.day, 18, 30, 0).time()
                 prazo_primeira_aula = datetime(date.year, date.month, date.day, 19, 30, 0).time()
                 prazo_segunda_aula = datetime(date.year, date.month, date.day, 20, 30, 0).time()
                 prazo_terceira_aula = datetime(date.year, date.month, date.day, 21, 30, 0).time()
-                prazo_final_aula = datetime(date.year, date.month, date.day, 22, 30, 0).time()
+                prazo_final_aula = datetime(date.year, date.month, date.day, 22, 50, 0).time()
 
                 primeira_aula = datetime(date.year, date.month, date.day, 19, 0, 0).time()
                 segunda_aula = datetime(date.year, date.month, date.day, 20, 0, 0).time()
@@ -52,15 +56,10 @@ class FormPresenca(forms.Form):
                 fuso_horario = timezone(diferenca)
                 date_time = datetime.combine(date, time).astimezone(fuso_horario)
 
-                if Aula.objects.filter(dataHora=date_time).exists():
-                    aula = Aula.objects.filter(datetime=date_time)
-                    if Presenca.objects.filter(aula=aula, aluno=aluno):
-                        raise ValueError("Aluno já presente")
-                    if time > prazo_final_aula:
-                        raise ValueError("Você está Atrasado!")
-                else:
+                if time > prazo_final_aula:
+                    raise ValueError("Você está Atrasado!")
+                if time < prazo_inicio_aula:
+                    raise ValueError("Chamada não iniciada!")
+                if Aula.objects.filter(dataHora=date_time).filter(nmAula=nmAula) is None:
                     raise ValueError("Disciplina não encontrada!")
-            else:
-                raise ValueError("Aluno não encontrado")
-        else:
-            raise ValidationError("")
+

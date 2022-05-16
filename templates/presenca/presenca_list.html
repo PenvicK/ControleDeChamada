@@ -9,9 +9,10 @@
         <button>Nova Chamada</button>
     </a>
     <ul>
-    {% for chamada in object_list %}
+    {% for chamada in presencas %}
         <li>
-            {{ chamada }}
+            {{ chamada.aluno.nome }}
+            {{ chamada.presenca }}
             <a href="/presenca/{{ chamada.id }}">
                 <button>Detalhes</button>
             </a>

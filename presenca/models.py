@@ -10,8 +10,8 @@ from aula.models import Aula
 class Presenca (models.Model):
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    presenca = models.BooleanField(default=False)
-    flTemp = models.BooleanField(default=False)
+    presenca = models.BooleanField(null=True)
+    flTemp = models.BooleanField(null=True)
 
     def __str__(self):
         return str(self.aluno.nome)

@@ -24,14 +24,26 @@ def presenca_form(request):
         form = FormPresenca(request.POST)
         if form.is_valid():
             rfId = form.cleaned_data['rfId']
-            aluno = Aluno.objects.filter(rfID=rfId)
+            aulas = form.cleaned_data['nmAula']
+            nmAula = aulas.nmAula
+            aluno = Aluno.objects.filter(rfID=rfId).get()
             date = datetime.today().date()
             time = datetime.today().time()
+            manha = datetime(date.year, date.month, date.day, 7, 30, 0).time()
+            noite = datetime(date.year, date.month, date.day, 18, 30, 0).time()
+            prazo_final_aula_manha = datetime(date.year, date.month, date.day, 11, 30, 0).time()
+            prazo_final_aula_noite = datetime(date.year, date.month, date.day, 22, 30, 0).time()
 
-            prazo_primeira_aula = datetime(date.year, date.month, date.day, 19, 30, 0).time()
-            prazo_segunda_aula = datetime(date.year, date.month, date.day, 20, 30, 0).time()
-            prazo_terceira_aula = datetime(date.year, date.month, date.day, 21, 30, 0).time()
-            prazo_final_aula = datetime(date.year, date.month, date.day, 22, 30, 0).time()
+            if prazo_final_aula_manha <= time >= manha:
+                prazo_primeira_aula = datetime(date.year, date.month, date.day, 8, 30, 0).time()
+                prazo_segunda_aula = datetime(date.year, date.month, date.day, 9, 30, 0).time()
+                prazo_terceira_aula = datetime(date.year, date.month, date.day, 10, 30, 0).time()
+                prazo_final_aula = datetime(date.year, date.month, date.day, 11, 30, 0).time()
+            if prazo_final_aula_noite <= time >= noite:
+                prazo_primeira_aula = datetime(date.year, date.month, date.day, 19, 30, 0).time()
+                prazo_segunda_aula = datetime(date.year, date.month, date.day, 20, 30, 0).time()
+                prazo_terceira_aula = datetime(date.year, date.month, date.day, 21, 30, 0).time()
+                prazo_final_aula = datetime(date.year, date.month, date.day, 22, 30, 0).time()
 
             primeira_aula = datetime(date.year, date.month, date.day, 19, 0, 0).time()
             segunda_aula = datetime(date.year, date.month, date.day, 20, 0, 0).time()
@@ -60,38 +72,39 @@ def presenca_form(request):
             date_time_segunda_aula = datetime.combine(date, timeSegundaAula).astimezone(fuso_horario)
             date_time_terceira_aula = datetime.combine(date, timeTerceiraAula).astimezone(fuso_horario)
 
-            disciplinaPrimeiraAula = Aula.objects.filter(dataHora=date_time_primeira_aula)
-            disciplinaSegundaAula = Aula.objects.filter(dataHora=date_time_segunda_aula)
-            disciplinaTerceiraAula = Aula.objects.filter(dataHora=date_time_terceira_aula)
+            primeiraAula = Aula.objects.filter(dataHora=date_time_primeira_aula).filter(nmAula=nmAula).get()
+            segundaAula = Aula.objects.filter(dataHora=date_time_segunda_aula).filter(nmAula=nmAula).get()
+            terceiraAula = Aula.objects.filter(dataHora=date_time_terceira_aula).filter(nmAula=nmAula).get()
 
 
             if time == primeira_aula:
-                pre_aula1 = Presenca(aluno=aluno, aula=disciplinaPrimeiraAula, presenca=False, flTemp=True)
-                pre_aula2 = Presenca(aluno=aluno, aula=disciplinaSegundaAula, presenca=False, flTemp=True)
-                pre_aula3 = Presenca(aluno=aluno, aula=disciplinaTerceiraAula, presenca=False, flTemp=True)
+                pre_aula1 = Presenca(aluno=aluno, aula=primeiraAula, presenca=False, flTemp=True)
                 pre_aula1.save()
+                pre_aula2 = Presenca(aluno=aluno, aula=segundaAula, presenca=False, flTemp=True)
                 pre_aula2.save()
+                pre_aula3 = Presenca(aluno=aluno, aula=terceiraAula, presenca=False, flTemp=True)
                 pre_aula3.save()
             elif time == segunda_aula:
-                pre_aula1 = Presenca(aluno=aluno, aula=disciplinaPrimeiraAula, presenca=False, flTemp=False)
-                pre_aula2 = Presenca(aluno=aluno, aula=disciplinaSegundaAula, presenca=False, flTemp=True)
-                pre_aula3 = Presenca(aluno=aluno, aula=disciplinaTerceiraAula, presenca=False, flTemp=True)
+                pre_aula1 = Presenca(aluno=aluno, aula=primeiraAula, presenca=False, flTemp=False)
+                pre_aula2 = Presenca(aluno=aluno, aula=segundaAula, presenca=False, flTemp=True)
+                pre_aula3 = Presenca(aluno=aluno, aula=terceiraAula, presenca=False, flTemp=True)
                 pre_aula1.save()
                 pre_aula2.save()
                 pre_aula3.save()
             elif time == terceira_aula:
-                pre_aula1 = Presenca(aluno=aluno, aula=disciplinaPrimeiraAula, presenca=False, flTemp=False)
-                pre_aula2 = Presenca(aluno=aluno, aula=disciplinaSegundaAula, presenca=False, flTemp=False)
-                pre_aula3 = Presenca(aluno=aluno, aula=disciplinaTerceiraAula, presenca=False, flTemp=True)
+                pre_aula1 = Presenca(aluno=aluno, aula=primeiraAula, presenca=False, flTemp=False)
                 pre_aula1.save()
+                pre_aula2 = Presenca(aluno=aluno, aula=segundaAula, presenca=False, flTemp=False)
                 pre_aula2.save()
+                pre_aula3 = Presenca(aluno=aluno, aula=terceiraAula, presenca=False, flTemp=True)
                 pre_aula3.save()
+
             elif time == final_aula:
 
-                if Presenca.objects.filter(aluno=aluno).filter(aula=disciplinaPrimeiraAula).exists() and Presenca.objects.filter(aluno=aluno).filter(aula=disciplinaSegundaAula).exists() and Presenca.objects.filter(aluno=aluno).filter(aula=disciplinaTerceiraAula).exists():
-                    pre_aula1 = Presenca.objects.filter(aluno=aluno).filter(aula=disciplinaPrimeiraAula)
-                    pre_aula2 = Presenca.objects.filter(aluno=aluno).filter(aula=disciplinaSegundaAula)
-                    pre_aula3 = Presenca.objects.filter(aluno=aluno).filter(aula=disciplinaTerceiraAula)
+                if Presenca.objects.filter(aluno=aluno).filter(aula=primeiraAula).exists() and Presenca.objects.filter(aluno=aluno).filter(aula=segundaAula).exists() and Presenca.objects.filter(aluno=aluno).filter(aula=terceiraAula).exists():
+                    pre_aula1 = Presenca.objects.filter(aluno=aluno).filter(aula=primeiraAula)
+                    pre_aula2 = Presenca.objects.filter(aluno=aluno).filter(aula=segundaAula)
+                    pre_aula3 = Presenca.objects.filter(aluno=aluno).filter(aula=terceiraAula)
                     if pre_aula1.model.flTemp:
                         pre_aula1.update(presenca=True)
                     if pre_aula2.model.flTemp:
@@ -107,12 +120,11 @@ def presenca_form(request):
 
 
 def presenca_list(request):
-    aulas = Aula.objects.all()
+    presencas = Presenca.objects.all()
     context = {
-        'aulas': aulas,
-        'timezones': 'America/Sao_Paulo',
+        'presencas': presencas
     }
-    return  render(request, "aula/aula_list.html", context)
+    return  render(request, "presenca/presenca_list.html", context)
 
 class PresencaDetail(generic.DetailView):
     model = Presenca

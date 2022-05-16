@@ -20,18 +20,35 @@ def aula_form(request):
     else:
         form = FormAulaNova(request.POST)
         if form.is_valid():
-            dt = form.cleaned_data['data']
-            data = dt.strftime('%y-%m-%d')
-            time = form.cleaned_data['time']
-            date_time = data + " " + time
+            date = form.cleaned_data['data']
+            disciplina = form.cleaned_data['disciplina']
+            periodo = form.cleaned_data['periodo']
+            periodo_curso = form.cleaned_data['periodo_curso']
+            curso = form.cleaned_data['curso']
             diferenca = timedelta(hours=-3)
             fuso_horario = timezone(diferenca)
-            form_dataHora = datetime.strptime(date_time, '%y-%m-%d %H').astimezone(fuso_horario)
-            form_disciplina = form.cleaned_data['disciplina']
 
+            if periodo == "N":
+                time1 = datetime(date.year, date.month, date.day, 19, 0, 0).time()
+                time2 = datetime(date.year, date.month, date.day, 20, 0, 0).time()
+                time3 = datetime(date.year, date.month, date.day, 21, 0, 0).time()
+            else:
+                time1 = datetime(date.year, date.month, date.day, 8, 0, 0).time()
+                time2 = datetime(date.year, date.month, date.day, 9, 0, 0).time()
+                time3 = datetime(date.year, date.month, date.day, 10, 0, 0).time()
 
-            new_form = Aula(dataHora=form_dataHora, disciplina=form_disciplina)
-            new_form.save()
+            dataHora1 = datetime.combine(date, time1).astimezone(fuso_horario)
+            dataHora2 = datetime.combine(date, time2).astimezone(fuso_horario)
+            dataHora3 = datetime.combine(date, time3).astimezone(fuso_horario)
+
+            nmAula= disciplina.projeto + " - " + curso + " - " + periodo_curso
+
+            new_aula1 = Aula(dataHora=dataHora1, disciplina=disciplina, nmAula=nmAula)
+            new_aula1.save()
+            new_aula2 = Aula(dataHora=dataHora2, disciplina=disciplina, nmAula=nmAula)
+            new_aula2.save()
+            new_aula3 = Aula(dataHora=dataHora3, disciplina=disciplina, nmAula=nmAula)
+            new_aula3.save()
             form = FormAulaNova()
             context = {
                 'form': form
