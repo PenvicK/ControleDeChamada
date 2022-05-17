@@ -34,12 +34,12 @@ def presenca_form(request):
             prazo_final_aula_manha = datetime(date.year, date.month, date.day, 11, 30, 0).time()
             prazo_final_aula_noite = datetime(date.year, date.month, date.day, 22, 30, 0).time()
 
-            if prazo_final_aula_manha <= time >= manha:
+            if prazo_final_aula_manha > time > manha:
                 prazo_primeira_aula = datetime(date.year, date.month, date.day, 8, 30, 0).time()
                 prazo_segunda_aula = datetime(date.year, date.month, date.day, 9, 30, 0).time()
                 prazo_terceira_aula = datetime(date.year, date.month, date.day, 10, 30, 0).time()
                 prazo_final_aula = datetime(date.year, date.month, date.day, 11, 30, 0).time()
-            if prazo_final_aula_noite <= time >= noite:
+            if prazo_final_aula_noite > time > noite:
                 prazo_primeira_aula = datetime(date.year, date.month, date.day, 19, 30, 0).time()
                 prazo_segunda_aula = datetime(date.year, date.month, date.day, 20, 30, 0).time()
                 prazo_terceira_aula = datetime(date.year, date.month, date.day, 21, 30, 0).time()
@@ -100,7 +100,12 @@ def presenca_form(request):
                 pre_aula3.save()
 
             elif time == final_aula:
-
+                pre_aula1f = Presenca(aluno=aluno, aula=primeiraAula, presenca=False, flTemp=False)
+                pre_aula1f.save()
+                pre_aula2f = Presenca(aluno=aluno, aula=segundaAula, presenca=False, flTemp=False)
+                pre_aula2f.save()
+                pre_aula3f = Presenca(aluno=aluno, aula=terceiraAula, presenca=False, flTemp=False)
+                pre_aula3f.save()
                 if Presenca.objects.filter(aluno=aluno).filter(aula=primeiraAula).exists() and Presenca.objects.filter(aluno=aluno).filter(aula=segundaAula).exists() and Presenca.objects.filter(aluno=aluno).filter(aula=terceiraAula).exists():
                     pre_aula1 = Presenca.objects.filter(aluno=aluno).filter(aula=primeiraAula)
                     pre_aula2 = Presenca.objects.filter(aluno=aluno).filter(aula=segundaAula)

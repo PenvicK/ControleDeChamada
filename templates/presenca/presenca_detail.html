@@ -3,31 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ object.aluno.nome}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <div>
-        <h2>{{ object.aluno.nome }}</h2>
-        <p>
-            <strong>ID: </strong>
-            <span>{{ object.id }}</span>
-        </p>
-        <p>
-            <strong>Projeto: </strong>
-            <span>{{ object.aula.disciplina.projeto }} | </span>
-            <strong>Data/Hora: </strong>
-            <span>{{ object.aula.dataHora.date }} | {{ object.aula.dataHora.timetz }}</span>
-        </p>
+    <div class="container mt-5 ">
+        <div>
+            <h2>{{ object.aluno.nome }}</h2>
+            <p>
+                <strong>ID: </strong>
+                <span>{{ object.id }}</span>
+            </p>
+            <p>
+                <strong>Aula: </strong>
+                <span>{{ object.aula.nmAula }} | </span>
+                <strong>Data/Hora: </strong>
+
+
+                <span>{{ object.aula.dataHora.astimezone }} |</span>
+
+                <strong>Presença: </strong>
+                {% if object.presenca == True %}
+                    <span> Presente </span>
+                {% else %}
+                    <span> Faltou </span>
+                {% endif %}
+            </p>
+        </div>
+        <div>
+            <a href="/presenca/{{ object.id }}/update/">
+                <button>Editar</button>
+            </a>
+            <a href="/presenca/{{ object.id }}/delete/">
+                <button>Deletar</button>
+            </a>
+            <a href="/presenca/lista">
+                <button>Voltar</button>
+            </a>
+        </div>
     </div>
-    <div>
-        <a href="/presenca/{{ object.id }}/update/">
-            <button>Editar</button>
-        </a>
-        <a href="/presenca/{{ object.id }}/delete/">
-            <button>Deletar</button>
-        </a>
-        <a href="/presenca/lista">
-            <button>Voltar</button>
-        </a>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 </body>
 </html>
