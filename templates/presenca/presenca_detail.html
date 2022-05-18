@@ -7,37 +7,51 @@
 </head>
 <body>
     <div class="container mt-5 ">
-        <div>
-            <h2>{{ object.aluno.nome }}</h2>
-            <p>
-                <strong>ID: </strong>
-                <span>{{ object.id }}</span>
-            </p>
-            <p>
-                <strong>Aula: </strong>
-                <span>{{ object.aula.nmAula }} | </span>
-                <strong>Data/Hora: </strong>
-
-
-                <span>{{ object.aula.dataHora.astimezone }} |</span>
-
-                <strong>Presença: </strong>
-                {% if object.presenca == True %}
-                    <span> Presente </span>
-                {% else %}
-                    <span> Faltou </span>
-                {% endif %}
-            </p>
+        <div class="row justify-content-center">
+            <img src="https://ik.imagekit.io/28ipjvuevaj/imgs/logo-uad.png" class="logo-menu w-25 h-25">
         </div>
-        <div>
-            <a href="/presenca/{{ object.id }}/update/">
-                <button>Editar</button>
-            </a>
-            <a href="/presenca/{{ object.id }}/delete/">
-                <button>Deletar</button>
-            </a>
-            <a href="/presenca/lista">
-                <button>Voltar</button>
+        <div class="row justify-content-center">
+            <div class="row">
+                <span class="col-lg-3 fs-3">{{ object.aluno.nome }}</span>
+                <div class="col-lg-1">
+                    <strong class="fs-4">ID: </strong>
+                    <span class="fs-4">{{ object.id }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <strong class="fs-4">Aula: </strong>
+                    <span class="fs-4">{{ object.aula.nmAula }}</span>
+                </div>
+                <div class="col-lg-1">
+                    <a href="/presenca/{{ object.id }}/update/">
+                        <button type="button" class="btn btn-primary">Editar</button>
+                    </a>
+                </div>
+                <div class="col-lg-1">
+                    <a href="/presenca/{{ object.id }}/delete/">
+                        <button type="button" class="btn btn-danger">Deletar</button>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <strong class="fs-4">Data/Hora: </strong>
+                    <span class="fs-4">{{ object.aula.dataHora.astimezone }}</span>
+                </div>
+                <div class="col-lg-3">
+                    <strong class="fs-4">Presença: </strong>
+                    {% if object.presenca == True %}
+                        <span class="fs-4"> Presente </span>
+                    {% else %}
+                        <span class="fs-4"> Faltou </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <a href="/presenca/lista" class="p-4">
+                <button type="button" class="btn btn-success ml-3">Voltar</button>
             </a>
         </div>
     </div>

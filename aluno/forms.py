@@ -1,7 +1,15 @@
+from django import template
+
 from django.core.exceptions import ValidationError
 from django import forms
 
 from aluno.models import Aluno
+
+register = template.Library()
+
+@register.filter(name='addclass')
+def addclass(value, arg):
+    return value.as_widget(attrs={'class': arg})
 
 class FormAlunoNovo(forms.Form):
     ra = forms.IntegerField()
