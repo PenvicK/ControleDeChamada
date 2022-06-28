@@ -1,22 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Alunos</title>
-</head>
-<body>
-    <a href="/aluno/novo/">
-        <button>Novo Aluno</button>
-    </a>
-    <ul>
-    {% for aluno in alunos %}
-        <li>
-            {{ aluno }}
-            <a href="/aluno/{{ aluno.id }}">
-                <button>Detalhes</button>
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'model/templateList.html' %}
+{% block title %}Alunos{% endblock %}
+{% block linkButton %}{% url 'aluno-novo' %}{% endblock %}
+{% block buttton %}Novo Aluno{% endblock %}
+{% block content %}
+    <table class="table">
+        <tr>
+            <th scope="col" class="col-lg-3">Nome</th>
+            <th scope="col" class="col-lg-3">RA</th>
+            <th scope="col" class="col-lg-3">Usuário Discord</th>
+            <th scope="col" class="col-lg-3">Ação</th>
+        </tr>
+        {% for aluno in alunos %}
+            {% if aluno.usuarioDiscord != "NOTFOUND#123" and  aluno.role == "aluno"%}
+                <tr>
+                    <td >
+                        {{ aluno.nome }}
+                    </td>
+                    <td>
+                        {{ aluno.ra }}
+                    </td>
+                    <td>
+                        {{ aluno.usuarioDiscord }}
+                    </td>
+                    <td>
+                        <a href="/usuario/aluno/{{ aluno.id }}" class="text-decoration-none">
+                            <button type="button" class="btn btn-secondary" >Detalhes</button>
+                        </a>
+                        <a href="/usuario/aluno/{{ aluno.id }}/update/" class="text-decoration-none">
+                            <button type="button" class="btn btn-primary">Editar</button>
+                        </a>
+                        <a href="/usuario/aluno/{{ aluno.id }}/delete/" class="text-decoration-none">
+                            <button type="button" class="btn btn-danger">Deletar</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endblock %}

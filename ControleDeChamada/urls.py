@@ -20,8 +20,10 @@ from index import views
 
 urlpatterns = [
     path('aula/', include('aula.urls')),
-    path('aluno/', include('aluno.urls')),
+    path('usuario/', include('aluno.urls')),
     path('disciplina/', include('disciplina.urls')),
     path('presenca/', include('presenca.urls')),
-    path('index/', views.index,name='index'),
+    path('curso/', include('curso.urls')),
+    path('cursos/', include('cursos.urls')),
+    path('index/', views.index, name='index'),
 ]

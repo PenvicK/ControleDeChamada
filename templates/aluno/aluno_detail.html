@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ object.nome }}</title>
-</head>
-<body>
-    <div>
-        <h2>{{ object.nome }}</h2>
-        <p>
-            <strong>ID: </strong>
-            <span>{{ object.id }} | </span>
-            <strong>RA: </strong>
-            <span>{{ object.ra }}</span>
-        </p>
-        <p>
-            <strong>Usuário Discord: </strong>
-            <span>{{ object.usuarioDiscord }}</span>
-        </p>
-    </div>
-    <div>
-        <a href="/aluno/{{ aluno.id }}/update/">
-            <button>Editar</button>
-        </a>
-        <a href="/aluno/{{ aluno.id }}/delete/">
-            <button>Deletar</button>
-        </a>
-        <a href="/aluno/lista">
-                <button>Voltar</button>
-        </a>
-    </div>
-</body>
-</html>
+{% extends 'model/templateDetail.html' %}
+{% block title %}Aluno{% endblock %}
+{% block linkVolta %}{% url 'aluno-lista' %}{% endblock %}
+{% block titlePage %}{{ object.nome }}{% endblock %}
+{% block content %}
+        <div class="col-lg-1">
+            <strong class="fs-4">ID: </strong>
+            <span class="fs-4">{{ object.id }}</span>
+        </div>
+        <div class="col-lg-2">
+            <strong class="fs-4">RA: </strong>
+            <span class="fs-4">{{ object.ra }}</span>
+        </div>
+        <div class="col-lg-4">
+            <strong class="fs-4">Usuário Discord: </strong>
+            <span class="fs-4">{{ object.usuarioDiscord }}</span>
+        </div>
+        <div class="col-lg-4">
+            <strong class="fs-4">RFID: </strong>
+            <span class="fs-4">{{ object.rfID }}</span>
+        </div>
+{% endblock %}
+

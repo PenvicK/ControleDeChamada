@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chamada</title>
-</head>
-<body>
-    <form method="post">
-        {%csrf_token%}
-        {{ form }}
-        <input type="submit" value="Confirmar"/>
-    </form>
-    <a href="/presenca/lista/">
-        <button>Cancelar</button>
-    </a>
-</body>
-</html>
+{% extends 'model/templateForm.html' %}
+{% block title %}Chamada{% endblock %}
+{% block linkVolta %}{% url 'presenca-lista' %}{% endblock %}
+{% block content %}
+    {%csrf_token%}
+    <div class="row">
+        <label class="p-0">RFID</label>
+        {{ form.rfId }}
+    </div>
+    <div class="row">
+        <label class="p-0">Aula</label>
+        {{ form.nmAula }}
+    </div>
+{% endblock %}

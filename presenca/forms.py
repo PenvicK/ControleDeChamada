@@ -41,7 +41,7 @@ class FormPresenca(forms.Form):
                 terceira_aula = datetime(date.year, date.month, date.day, 21, 0, 0).time()
                 final_aula = datetime(date.year, date.month, date.day, 22, 0, 0).time()
 
-                if time < prazo_primeira_aula:  # tempo menor que prazo primeira aula
+                if prazo_primeira_aula > time > prazo_inicio_aula:  # tempo menor que prazo primeira aula
                     time = primeira_aula
                 elif prazo_primeira_aula < time < prazo_segunda_aula:  # tempo maior que prazo primeira aula & menor que segunda aula
                     time = segunda_aula
@@ -62,4 +62,5 @@ class FormPresenca(forms.Form):
                     raise ValueError("Chamada não iniciada!")
                 if Aula.objects.filter(dataHora=date_time).filter(nmAula=nmAula) is None:
                     raise ValueError("Disciplina não encontrada!")
+
 

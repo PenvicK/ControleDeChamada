@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastrar Disciplina</title>
-</head>
-<body>
-    <form method="post">
-        {%csrf_token%}
-        {{ form }}
-        <input type="submit" value="Criar"/>
-    </form>
-    <a href="/disciplina/lista/">
-        <button>Cancelar</button>
-    </a>
-</body>
-</html>
+{% extends 'model/templateForm.html' %}
+{% block title %}Disciplina{% endblock %}
+{% block linkVolta %}{% url 'disciplina-lista' %}{% endblock %}
+{% block content %}
+    {%csrf_token%}
+    <div class="row">
+        <label class="p-0">Nome do Projeto</label>
+        {{ form.projeto }}
+    </div>
+    <div class="row">
+        <label class="p-0">Nome do Professor</label>
+        {{ form.nomeProfessor }}
+    </div>
+{#    <div class="row">#}
+{#        <label class="p-0">Id do Professor</label>#}
+{#        {{ form.idProfessor }}#}
+{#    </div>#}
+{% endblock %}
+
+

@@ -1,23 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
-    <ul>
-        <li>
-            <a href="">Disciplina</a>
-        </li>
-        <li>
-            <a href="">Aluno</a>
-        </li>
-        <li>
-            <a href="aula-lista">Aula</a>
-        </li>
-        <li>
-            <a href="">Presença</a>
-        </li>
-    </ul>
-</body>
-</html>
+{% extends 'model/tamplateHeader.html' %}
+{% block content %}
+    <style>
+        .label-index {
+            background-color: rgb(251, 251, 248);
+            border-radius: 4px;
+        }
+        .label-index:hover {
+            background-color: #63ae2d;
+            border-radius: 4px;
+            color: white;
+        }
+        .link-index {
+            color: black;
+        }
+        .link-index:hover {
+            color: white;
+        }
+    </style>
+    <div class=" mt-5">
+        <h4 class="fs-4">MENU</h4>
+        <hr class="border-success border-3 opacity-75">
+        <label class="p-2 row fs-4 label-index"><a href="{% url 'curso-lista' %}" class="text-decoration-none link-index">Curso</a></label>
+        <label class="p-2 row fs-4 label-index"><a href="{% url 'disciplina-lista' %}" class="text-decoration-none link-index">Disciplina</a></label>
+        <label class="p-2 row fs-4 label-index"><a href="{% url 'aula-lista' %}" class="text-decoration-none link-index">Aula</a></label>
+        <label class="p-2 row fs-4 label-index"><a href="{% url 'aluno-lista' %}" class="text-decoration-none link-index">Aluno</a></label>
+        <label class="p-2 row fs-4 label-index"><a href="{% url 'professor-lista' %}" class="text-decoration-none link-index">Professor</a></label>
+        <label class="p-2 row fs-4 label-index"><a href="{% url 'presenca-lista' %}" class="text-decoration-none link-index">Chamada</a></label>
+    </div>
+{% endblock %}

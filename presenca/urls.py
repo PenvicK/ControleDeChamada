@@ -5,6 +5,7 @@ from presenca.views import PresencaDetail, PresencaDelete
 
 urlpatterns = [
     path('nova/', views.presenca_form, name="presenca_nova"),
+    path('discord/nova/', views.discord_post_presenca, name="discord-presenca"),
     path('<int:pk>/', PresencaDetail.as_view(), name='presenca-detail'),
     path('lista/', views.presenca_list, name='presenca-lista'),
     # path('aula/<int:pk>/update/', AulaUpdate.as_view(), name='aula-update'),

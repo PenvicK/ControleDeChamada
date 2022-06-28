@@ -1,13 +1,11 @@
 from datetime import datetime, timezone, timedelta
 
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
 from aula.forms import FormAulaNova
 from aula.models import Aula
-from disciplina.models import Disciplina
 
 
 def aula_form(request):
@@ -23,7 +21,6 @@ def aula_form(request):
             date = form.cleaned_data['data']
             disciplina = form.cleaned_data['disciplina']
             periodo = form.cleaned_data['periodo']
-            periodo_curso = form.cleaned_data['periodo_curso']
             curso = form.cleaned_data['curso']
             diferenca = timedelta(hours=-3)
             fuso_horario = timezone(diferenca)
@@ -41,8 +38,7 @@ def aula_form(request):
             dataHora2 = datetime.combine(date, time2).astimezone(fuso_horario)
             dataHora3 = datetime.combine(date, time3).astimezone(fuso_horario)
 
-            nmAula= disciplina.projeto + " - " + curso + " - " + periodo_curso
-
+            nmAula= disciplina.projeto + " - " + curso.curso + " - " + curso.periodo_curso
             new_aula1 = Aula(dataHora=dataHora1, disciplina=disciplina, nmAula=nmAula)
             new_aula1.save()
             new_aula2 = Aula(dataHora=dataHora2, disciplina=disciplina, nmAula=nmAula)
@@ -67,15 +63,6 @@ def aula_list(request):
 class AulaDetail(generic.DetailView):
     model = Aula
 
-# class AulaLista(generic.ListView):
-#     model = Aula
-#     queryset = Aula.objects.all()
-
-# class AulaUpdate(generic.UpdateView):
-#     model = Aula
-#     fields = ['dataHora',]
-#     template_name_suffix = '_update_form'
-#
 class AulaDelete(generic.DeleteView):
     model = Aula
     success_url = reverse_lazy('aula-lista')

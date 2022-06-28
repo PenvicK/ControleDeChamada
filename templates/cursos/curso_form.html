@@ -1,0 +1,12 @@
+{% extends 'model/templateForm.html' %}
+{% block title %}Disciplina{% endblock %}
+{% block linkVolta %}{% url 'disciplina-lista' %}{% endblock %}
+{% block content %}
+    {%csrf_token%}
+    <div class="row">
+        <label class="p-0">Nome do Curso</label>
+        {{ form.curso }}
+    </div>
+{% endblock %}
+
+

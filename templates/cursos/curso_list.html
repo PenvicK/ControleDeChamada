@@ -1,0 +1,30 @@
+{% extends 'model/templateList.html' %}
+{% block title %}Cursos{% endblock %}
+{% block linkButton %}{% url 'curso-novo' %}{% endblock %}
+{% block buttton %}Novo Curso{% endblock %}
+{% block content %}
+    <table class="table">
+        <tr>
+            <th scope="col" class="col-lg-4">Curso</th>
+            <th scope="col" class="col-lg-3">Ação</th>
+        </tr>
+        {% for curso in cursos %}
+        <tr>
+            <td >
+                {{ curso.curso }}
+            </td>
+            <td>
+                <a href="/cursos/{{ curso.id }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-secondary">Detalhes</button>
+                </a>
+                <a href="/cursos/{{ curso.id }}/update/" class="text-decoration-none">
+                    <button type="button" class="btn btn-primary">Editar</button>
+                </a>
+                <a href="/cursos/{{ curso.id }}/delete/" class="text-decoration-none">
+                    <button type="button" class="btn btn-danger">Deletar</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

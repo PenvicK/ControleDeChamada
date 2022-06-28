@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from aluno.models import Aluno
 from disciplina.forms import FormDisciplinaNova
 from disciplina.models import Disciplina
 
@@ -19,9 +20,8 @@ def disciplina_form(request):
         if form.is_valid():
             projeto = form.cleaned_data['projeto']
             nomeProfessor = form.cleaned_data['nomeProfessor']
-            idProfessor = form.cleaned_data['idProfessor']
 
-            new_form = Disciplina(projeto = projeto, nomeProfessor = nomeProfessor, idProfessor = idProfessor)
+            new_form = Disciplina(projeto = projeto, nomeProfessor = nomeProfessor)
             new_form.save()
             form = FormDisciplinaNova()
             context = {

@@ -1,50 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Disciplinas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-</head>
-<body>
-    <div class="container mt-5 ">
-        <div class="row">
-            <div class="col-lg-4">
-                <a href="/presenca/nova/">
-                    <button type="button" class="btn btn-success">Nova Chamada</button>
+{% extends 'model/templateList.html' %}
+{% block title %}Chamada{% endblock %}
+{% block linkButton %}{% url 'presenca_nova' %}{% endblock %}
+{% block buttton %}Nova Chamada{% endblock %}
+{% block content %}
+    <table class="table">
+        <tr>
+            <th scope="col" class="col-lg-5">Nome</th>
+            <th scope="col" class="col-lg-5">Presença</th>
+            <th scope="col" class="col-lg-1">Ação</th>
+        </tr>
+        {% for chamada in presencas %}
+        <tr>
+            <td >
+                {{ chamada.aluno.nome }}
+            </td>
+            <td>
+                {% if chamada.presenca == True %}
+                    Presente
+                {% else %}
+                    Faltou
+                {% endif %}
+            </td>
+            <td>
+                <a href="/presenca/{{ chamada.id }}">
+                    <button type="button" class="btn btn-primary">Detalhes</button>
                 </a>
-            </div>
-            <img src="https://ik.imagekit.io/28ipjvuevaj/imgs/logo-uad.png" class="logo-menu w-25 h-25 col-lg-7">
-        </div>
-        <div class="row">
-            <table class="table">
-                <tr>
-                    <th scope="col-lg-4">Nome</th>
-                    <th scope="col-lg-4">Presença</th>
-                    <th scope="col-lg-4">Ação</th>
-                </tr>
-                {% for chamada in presencas %}
-                <tr>
-                    <td >
-                        {{ chamada.aluno.nome }}
-                    </td>
-                    <td>
-                        {% if chamada.presenca == True %}
-                            Presente
-                        {% else %}
-                            Faltou
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="/presenca/{{ chamada.id }}">
-                            <button type="button" class="btn btn-primary">Detalhes</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-</body>
-</html>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

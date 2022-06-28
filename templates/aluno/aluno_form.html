@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Novo Aluno</title>
-</head>
-<body>
-    <form method="post">
-        {%csrf_token%}
-        {{ form }}
-        <input type="submit" value="Criar"/>
-    </form>
-    <a href="/aluno/lista/">
-        <button>Cancelar</button>
-    </a>
-</body>
-</html>
+{% extends 'model/templateForm.html' %}
+{% block title %}Aluno{% endblock %}
+{% block linkVolta %}{% url 'aluno-lista' %}{% endblock %}
+{% block content %}
+    {%csrf_token%}
+    <div class="row">
+        <label class="p-0">RA</label>
+        {{ form.ra }}
+    </div>
+    <div class="row">
+        <label class="p-0">Nome</label>
+        {{ form.nome }}
+    </div>
+    <div class="row">
+        <label class="p-0">Usuário do Discord</label>
+        {{ form.usuarioDiscord }}
+    </div>
+    <div class="row">
+        <label class="p-0">RFID</label>
+        {{ form.rfID }}
+    </div>
+    <div class="row">
+        <label class="p-0">Cargo</label>
+        {{ form.role }}
+    </div>
+{% endblock %}
