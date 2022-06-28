@@ -1,0 +1,20 @@
+{% extends 'model/templateDetail.html' %}
+{% block title %}Curso{% endblock %}
+{% block linkVolta %}{% url 'curso-lista' %}{% endblock %}
+{% block titlePage %}{{ object.projeto }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-1">
+            <strong class="fs-4">ID: </strong>
+            <span class="fs-4">{{ object.id }}</span>
+        </div>
+        <div class="col-3">
+            <strong class="fs-4">Curso: </strong>
+            <span class="fs-4">{{ object.curso }}</span>
+        </div>
+        <div class="col-4">
+            <strong class="fs-4">Periodo: </strong>
+            <span class="fs-4">{{ object.periodo_curso }}</span>
+        </div>
+    </div>
+{% endblock %}

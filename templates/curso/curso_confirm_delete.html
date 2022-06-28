@@ -1,0 +1,4 @@
+{% extends 'model/templateDelete.html' %}
+{% block infoDelete %}Desaja deletar a disciplina: {% endblock %}
+{% block textDelete %}{{ object.projeto }}{% endblock %}
+{% block linkCancel %}{% url 'disciplina-lista' %}{% endblock %}

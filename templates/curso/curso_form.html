@@ -1,0 +1,20 @@
+{% extends 'model/templateForm.html' %}
+{% block title %}Curso{% endblock %}
+{% block linkVolta %}{% url 'curso-lista' %}{% endblock %}
+{% block content %}
+    {%csrf_token%}
+    <div class="row">
+        <label class="p-0">Curso</label>
+        {{ form.curso }}
+    </div>
+    <div class="row">
+        <label class="p-0">Periodo</label>
+        {{ form.periodo_curso }}
+    </div>
+{#    <div class="row">#}
+{#        <label class="p-0">Id do Professor</label>#}
+{#        {{ form.idProfessor }}#}
+{#    </div>#}
+{% endblock %}
+
+

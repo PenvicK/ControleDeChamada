@@ -1,0 +1,26 @@
+{% extends 'model/templateForm.html' %}
+{% block title %}Professor{% endblock %}
+{% block linkVolta %}{% url 'professor-lista' %}{% endblock %}
+{% block content %}
+    {%csrf_token%}
+    <div class="row">
+        <label class="p-0">RA</label>
+        {{ form.ra }}
+    </div>
+    <div class="row">
+        <label class="p-0">Nome</label>
+        {{ form.nome }}
+    </div>
+    <div class="row">
+        <label class="p-0">Usuário do Discord</label>
+        {{ form.usuarioDiscord }}
+    </div>
+    <div class="row">
+        <label class="p-0">RFID</label>
+        {{ form.rfID }}
+    </div>
+    <div class="row">
+        <label class="p-0">Cargo</label>
+        {{ form.role }}
+    </div>
+{% endblock %}

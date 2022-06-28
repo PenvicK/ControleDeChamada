@@ -1,0 +1,4 @@
+{% extends 'model/templateDelete.html' %}
+{% block infoDelete %}Desaja deletar o Professor: {% endblock %}
+{% block textDelete %}{{ object.nome }}{% endblock %}
+{% block linkCancel %}{% url 'professor-lista' %}{% endblock %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Disciplina</title>
+</head>
+<body>
+    <form method="post">
+        {%csrf_token%}
+        {{ form }}
+        <input type="submit" value="Atualizar Dados"/>
+    </form>
+    <a href="/disciplina/lista/">
+        <button>Cancelar</button>
+    </a>
+</body>
+</html>

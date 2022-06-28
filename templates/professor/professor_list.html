@@ -1,0 +1,40 @@
+{% extends 'model/templateList.html' %}
+{% block title %}Professores{% endblock %}
+{% block linkButton %}{% url 'professor-novo' %}{% endblock %}
+{% block buttton %}Novo Professor{% endblock %}
+{% block content %}
+    <table class="table">
+        <tr>
+            <th scope="col" class="col-lg-3">Nome</th>
+            <th scope="col" class="col-lg-3">RA</th>
+            <th scope="col" class="col-lg-3">Usuário Discord</th>
+            <th scope="col" class="col-lg-3">Ação</th>
+        </tr>
+        {% for aluno in alunos %}
+            {% if aluno.usuarioDiscord != "NOTFOUND#123" and  aluno.role == "professor"%}
+                <tr>
+                    <td >
+                        {{ aluno.nome }}
+                    </td>
+                    <td>
+                        {{ aluno.ra }}
+                    </td>
+                    <td>
+                        {{ aluno.usuarioDiscord }}
+                    </td>
+                    <td>
+                        <a href="/usuario/professor/{{ aluno.id }}" class="text-decoration-none">
+                            <button type="button" class="btn btn-secondary" >Detalhes</button>
+                        </a>
+                        <a href="/usuario/professor/{{ aluno.id }}/update/" class="text-decoration-none">
+                            <button type="button" class="btn btn-primary">Editar</button>
+                        </a>
+                        <a href="/usuario/professor/{{ aluno.id }}/delete/" class="text-decoration-none">
+                            <button type="button" class="btn btn-danger">Deletar</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endblock %}
